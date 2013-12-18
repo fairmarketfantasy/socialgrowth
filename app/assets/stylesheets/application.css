@@ -11,3 +11,17 @@
  *= require_self
  *= require_tree .
  */
+
+.header-extra
+{
+	width:1000px;
+	margin:0 auto;
+}
+
+.header-extra h2
+{
+	display:inline-block;
+	margin:0px 20px;
+	float:left;
+	vertical-align:center;
+}

@@ -1,0 +1,9 @@
+<% title = "Authentications" %>
+
+<div class="header-extra">
+  <% if @user %>
+    <h2>Welcome, <%= @user.name %></h2>
+  <% else %>
+    <%= render "/authentications/partials/unauthenticated" %>
+  <% end %>
+</div>
