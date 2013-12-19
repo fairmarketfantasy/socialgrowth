@@ -25,9 +25,11 @@ GEM
       multi_json (~> 1.3)
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
+    addressable (2.3.5)
     arel (4.0.1)
     atomic (1.1.14)
     bcrypt-ruby (3.1.2)
+    buftok (0.2.0)
     builder (3.1.4)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -36,16 +38,28 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
+    descendants_tracker (0.0.3)
     devise (3.2.2)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 3.2.6, < 5)
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    equalizer (0.0.7)
     erubis (2.7.0)
     execjs (2.0.2)
+    factory_girl (4.3.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.3.0)
+      factory_girl (~> 4.3.0)
+      railties (>= 3.0.0)
+    faraday (0.8.8)
+      multipart-post (~> 1.2.0)
     hashie (2.0.5)
     hike (1.2.3)
+    http (0.5.0)
+      http_parser.rb
+    http_parser.rb (0.6.0)
     i18n (0.6.9)
     jbuilder (1.5.3)
       activesupport (>= 3.0.0)
@@ -57,12 +71,15 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    memoizable (0.3.1)
+      thread_safe (~> 0.1.3)
     metaclass (0.0.1)
     mime-types (1.25.1)
     minitest (4.7.5)
     mocha (0.14.0)
       metaclass (~> 0.0.1)
     multi_json (1.8.2)
+    multipart-post (1.2.0)
     nifty-generators (0.4.6)
     oauth (0.4.7)
     omniauth (1.1.4)
@@ -103,6 +120,7 @@ GEM
     sdoc (0.3.20)
       json (>= 1.1.3)
       rdoc (~> 3.10)
+    simple_oauth (0.2.0)
     sprockets (2.10.1)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -122,6 +140,17 @@ GEM
       polyglot (>= 0.3.1)
     turbolinks (2.0.0)
       coffee-rails
+    twitter (5.3.0)
+      addressable (~> 2.3)
+      buftok (~> 0.2.0)
+      descendants_tracker (~> 0.0.1)
+      equalizer (~> 0.0.7, != 0.0.8)
+      faraday (>= 0.8, < 0.10)
+      http (~> 0.5.0)
+      http_parser.rb (~> 0.6.0)
+      json (~> 1.8)
+      memoizable (~> 0.3.1)
+      simple_oauth (~> 0.2.0)
     tzinfo (0.3.38)
     uglifier (2.3.3)
       execjs (>= 0.3.0)
@@ -135,6 +164,7 @@ PLATFORMS
 DEPENDENCIES
   coffee-rails (~> 4.0.0)
   devise
+  factory_girl_rails
   jbuilder (~> 1.2)
   jquery-rails
   mocha
@@ -146,4 +176,5 @@ DEPENDENCIES
   sdoc
   sqlite3
   turbolinks
+  twitter
   uglifier (>= 1.3.0)

@@ -1,8 +1,12 @@
 Socialgrowth::Application.routes.draw do
   resources :authentications
+  resources :campaigns
   devise_for :users
 
   match '/auth/:provider/callback' => 'authentications#create', via: [:get, :post]
+  match '/authentication/add' => 'authentications#unauthenticated', via: [:get, :post]
+  match '/application/home' => 'application#home', via: [:get, :post]
+  
   root 'authentications#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

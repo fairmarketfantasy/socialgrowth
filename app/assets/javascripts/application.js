@@ -14,3 +14,31 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+
+
+(function() {
+
+  window.App || ( window.App = {} )
+
+	var toggleBtnWithId = function(id, remove, add) {
+    var btn = $("#" + id);
+    var hidden = $("#hidden_" + id);
+
+    var oldClass = btn.attr("data-" + hidden.val()).split(" ")[1];
+    var newValue = toggleString(hidden.val());
+    var attributes = btn.attr("data-" + newValue).split(" ");
+
+    hidden.val(newValue);
+    btn.html(attributes[0]);
+    btn.removeClass(oldClass);
+    btn.addClass(attributes[1]);
+  }
+
+  var toggleString = function(bool) {
+    return bool == "true" ? "false" : "true"
+  }
+  
+  App.toggleBtn = toggleBtnWithId
+
+})();

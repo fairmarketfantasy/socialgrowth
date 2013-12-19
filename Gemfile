@@ -31,11 +31,13 @@ gem 'jbuilder', '~> 1.2'
 gem 'omniauth'
 gem 'omniauth-twitter'
 
+gem 'factory_girl_rails'
 # For creating users easily
 gem 'devise'
 
 gem 'nifty-generators'
 
+gem 'twitter'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

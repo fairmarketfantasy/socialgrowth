@@ -11,12 +11,48 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131218032552) do
+ActiveRecord::Schema.define(version: 20131218224513) do
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id"
     t.string   "provider"
     t.string   "uid"
+    t.string   "access_token"
+    t.string   "access_secret"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "nickname"
+  end
+
+  create_table "campaigns", force: true do |t|
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.boolean  "is_active",            default: false
+    t.integer  "spams_per_day",        default: 0
+    t.boolean  "should_auto_activate", default: false
+    t.integer  "tweets_sent_count",    default: 0
+    t.integer  "authentication_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "conversation_starters", force: true do |t|
+    t.integer  "campaign_id"
+    t.string   "text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "excluded_terms", force: true do |t|
+    t.integer  "search_criteria_id"
+    t.string   "text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "search_terms", force: true do |t|
+    t.integer  "campaign_id"
+    t.string   "text"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -35,7 +71,6 @@ ActiveRecord::Schema.define(version: 20131218032552) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
-    t.string   "nickname"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

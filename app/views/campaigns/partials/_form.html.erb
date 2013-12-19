@@ -1,0 +1,35 @@
+<%= form_for(@campaign) do |f| %>
+  <% if @campaign.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@campaign.errors.count, "error") %> prohibited this campaign from being saved:</h2>
+
+      <ul>
+      <% @campaign.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="center">
+  	<div class="section">
+  		<%= f.label :start_date %>
+    	<%= f.text_field :start_date %>
+  	</div>
+  	<div class="section">
+  		<%= f.label :end_date %>
+      <%= f.text_field :end_date %>
+  	</div>
+  	<div class="section">
+  		<button type="button" class="mts btn btn-<%= enabled_color @campaign.is_active %>" onclick="App.toggleBtn('campaign_is_active')"
+  			id="campaign_is_active" data-true="active btn-primary" data-false="inactive btn-default"><%= @campaign.is_active_string %></button>
+  		<input type='hidden' id='hidden_campaign_is_active' name='campaign[is_active]' value='<%= @campaign.is_active %>' />
+  	</div>
+  	<div class="section">
+  		<%= f.label :spams_per_day %>
+      <%= f.number_field :spams_per_day %>
+    </div>
+    <div class="section">  
+      <%= f.check_box :should_auto_activate, { class: "inline-block mbs pax" } %><%= f.label :should_auto_activate, { class: "inline-block mls mbn" }  %>
+    </div>
+  </div>
+<% end %>
