@@ -1,5 +1,5 @@
 class Authentication < ActiveRecord::Base
-  include AuthModules::TwitterModule
+  include AuthModules::TwitterAuth
 
   belongs_to :user
   

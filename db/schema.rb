@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20131218224513) do
   end
 
   create_table "campaigns", force: true do |t|
+    t.string   "title"
     t.datetime "start_date"
     t.datetime "end_date"
     t.boolean  "is_active",            default: false
@@ -44,7 +45,7 @@ ActiveRecord::Schema.define(version: 20131218224513) do
   end
 
   create_table "excluded_terms", force: true do |t|
-    t.integer  "search_criteria_id"
+    t.integer  "search_term_id"
     t.string   "text"
     t.datetime "created_at"
     t.datetime "updated_at"

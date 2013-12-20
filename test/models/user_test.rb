@@ -14,4 +14,5 @@ class UserTest < ActiveSupport::TestCase
   	user.authentications.push authentication
   	assert user.valid?, "User isn't valid: " + user.errors.full_messages.to_s
   end
+
 end
