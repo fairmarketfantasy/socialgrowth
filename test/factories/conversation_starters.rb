@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :conversation_starter do
-    campaign_id 1
-    text "MyString"
+    campaign
+    text "@user Merry Christmas, #presents #cold #notgoinanywhere"
   end
 end

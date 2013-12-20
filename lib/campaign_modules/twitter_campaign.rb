@@ -1,15 +1,25 @@
 module CampaignModules::TwitterCampaign
-  def tweet_person(person, message)
+  def tweet_person(person)
+    tweet_body = ""
     begin
-      self.authentication.twitter_client.update "@#{person} check out #{self.title}. #baws #mode"
+      conversation_starter = ConversationStarter.random(self.conversation_starters)
+      tweet_body = conversation_starter.replace_format("@#{person}")
+      self.authentication.twitter_client.update tweet_body
     rescue Exception => msg
-      puts msg
+      puts msg.to_s + ".\r\nCouldn't tweet: " + tweet_body
+    end
+  end
+
+  def spam_tweets
+    tweets = find_related_tweets
+    tweets.each do |tweet|
+      tweet_person tweet.user.screen_name
     end
   end
 
   def find_related_tweets
     tweets = []
-    for term in self.search_terms
+    self.search_terms.each do |term|
       tweets.concat(get_search_results term)
     end
     return tweets
@@ -21,9 +31,9 @@ module CampaignModules::TwitterCampaign
 
       self.authentication.twitter_client.search("#{search_term.text}", count: number_of_tweets_to_grab, result_type: "recent").collect do |tweet|
         next unless tweet.text.include? search_term.text
-        next if contains_excluded_term(tweet, search_term)
+        next if search_term.contains_excluded_term tweet.text
 
-        tweets.push(format_result tweet)
+        tweets.push(tweet)
       end
     rescue Exception => msg
       puts msg
@@ -39,13 +49,7 @@ module CampaignModules::TwitterCampaign
 
     def format_result(tweet)
       string = "#{tweet.user.screen_name}: #{tweet.text}"
-      puts string
       return string
-    end
-
-    def contains_excluded_term(tweet, search_term)
-      excluded_terms = search_term.excluded_terms.map { |term| term = Regexp.escape term.text }.join('|')
-      return Regexp.new(excluded_terms, Regexp::IGNORECASE).match tweet.text
     end
 
     def find_followers(auth)
