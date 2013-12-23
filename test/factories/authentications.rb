@@ -3,8 +3,8 @@ FactoryGirl.define do
   factory :user do
   end
 
-  factory :twitter, class: Authentication do
-    provider "twitter"
+  factory :twitter_authentication do
+    provider "TwitterAuthentication"
     uid 12345
     access_token 'x'
     access_secret 'y'

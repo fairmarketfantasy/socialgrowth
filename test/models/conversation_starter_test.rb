@@ -9,7 +9,7 @@ class ConversationStarterTest < ActiveSupport::TestCase
   end
 
   test "Can send conversation starters" do 
-    campaign = create(:campaign)
+    campaign = create(:twitter_campaign)
     term_1 = create(:search_term, text: "cloud", campaign: campaign)
     exclude_1 = create(:excluded_term, text: "humid", search_term: term_1)
 
@@ -17,6 +17,6 @@ class ConversationStarterTest < ActiveSupport::TestCase
     starter_2 = create(:conversation_starter, campaign: campaign, text: "And the winner is... @user! #thingsyouwishwouldhappen")
     starter_3 = create(:conversation_starter, campaign: campaign, text: "@user Ho ho ho, who wouldn't know? #notthensa")
 
-    campaign.spam_tweets
+    campaign.spam_people
   end
 end

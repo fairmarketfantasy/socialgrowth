@@ -1,7 +1,7 @@
 FactoryGirl.define do
 
-  factory :campaign do
-    association :authentication, factory: :twitter
+  factory :twitter_campaign do
+    association :authentication, factory: :twitter_authentication
     title "Oracle"
   end
 

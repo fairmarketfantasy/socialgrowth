@@ -16,7 +16,7 @@ class AuthenticationsController < ApplicationController
       user = User.new
       user.assign_name omniauth
 
-      user.authentications.build(provider: omniauth[:provider], uid: omniauth[:uid],
+      user.authentications.build(provider: omniauth[:provider].capitalize + "Authentication", uid: omniauth[:uid],
         access_token: omniauth[:credentials][:token], access_secret: omniauth[:credentials][:secret])
 
       if user.save

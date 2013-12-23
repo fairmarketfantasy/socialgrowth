@@ -8,7 +8,7 @@ class ConversationStarter < ActiveRecord::Base
   end
 
   def provider
-    return self.campaign.authentication.provider
+    return self.campaign.type
   end
 
   def self.random(conversation_starters)
@@ -26,7 +26,7 @@ class ConversationStarter < ActiveRecord::Base
   end
   
   def formats
-    return { "twitter" => "@user" }
+    return { "TwitterCampaign" => "@user" }
   end
 
 

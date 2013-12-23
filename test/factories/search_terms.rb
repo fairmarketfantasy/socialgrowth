@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :search_term do
-    campaign
+    association :campaign, factory: :twitter_campaign
     text "cloud"
   end
 end

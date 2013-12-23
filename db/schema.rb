@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20131218224513) do
 
   create_table "campaigns", force: true do |t|
     t.string   "title"
+    t.string   "type"
     t.datetime "start_date"
     t.datetime "end_date"
     t.boolean  "is_active",            default: false

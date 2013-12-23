@@ -2,6 +2,7 @@ class CreateCampaigns < ActiveRecord::Migration
   def change
     create_table :campaigns do |t|
       t.string :title
+      t.string :type
       t.datetime :start_date
       t.datetime :end_date
       t.boolean :is_active

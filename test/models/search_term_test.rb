@@ -3,7 +3,7 @@ require 'test_helper'
 class SearchTermTest < ActiveSupport::TestCase
 
   test "Can add search terms to a campaign" do 
-  	campaign = build(:campaign)
+  	campaign = build(:twitter_campaign)
   	term_1 = build(:search_term, text: "cloud", campaign: campaign)
   	term_2 = build(:search_term, text: "computing", campaign: campaign)
 

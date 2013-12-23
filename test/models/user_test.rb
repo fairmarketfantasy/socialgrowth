@@ -6,7 +6,7 @@ class UserTest < ActiveSupport::TestCase
   # end
 
   test "Can create authentication and user" do
-  	authentication = build(:twitter)
+  	authentication = build(:twitter_authentication)
   	assert authentication.valid?, "Authentication isn't valid: " + authentication.errors.full_messages.to_s
 
   	user = build(:user)
