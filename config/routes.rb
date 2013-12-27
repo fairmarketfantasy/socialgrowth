@@ -1,6 +1,10 @@
 Socialgrowth::Application.routes.draw do
   resources :authentications
-  resources :campaigns
+  
+  resources :campaigns do
+    get 'search', on: :collection
+  end
+
   devise_for :users
 
   match '/auth/:provider/callback' => 'authentications#create', via: [:get, :post]

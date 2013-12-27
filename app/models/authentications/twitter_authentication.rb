@@ -1,5 +1,5 @@
 class TwitterAuthentication < Authentication
-  def application_auth
+  def self.application_auth
     return Twitter::REST::Client.new do |config|
       config.consumer_key        = TWITTER_KEY
       config.consumer_secret     = TWITTER_SECRET
@@ -20,7 +20,7 @@ class TwitterAuthentication < Authentication
       client = single_user_auth
       client.user
     rescue
-      client = application_auth
+      client = TwitterAuthentication.application_auth
     end
     return client
   end

@@ -24,7 +24,7 @@ class AuthenticationsController < ApplicationController
         sign_in_and_redirect(:user, user)
       else
         flash[:notice] = "Sign in failed"
-        redirect_to "/application/home"
+        redirect_to application_home_path
       end
     end
   end
@@ -45,7 +45,7 @@ class AuthenticationsController < ApplicationController
 
     def authenticated
       if current_user == nil
-        redirect_to "/application/home"
+        redirect_to application_home_path
       end
     end
 end

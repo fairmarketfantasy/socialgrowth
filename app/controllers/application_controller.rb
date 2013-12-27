@@ -5,4 +5,13 @@ class ApplicationController < ActionController::Base
 
   def home
   end
+
+  private
+
+	  def current_authentication(request)
+	    omniauth = request.env["omniauth.auth"]
+	    auth = Authentication.find_by_provider_and_uid(omniauth.provider, omniauth.uid) if omniauth
+	    return auth.provider if auth
+	    return nil
+	  end
 end

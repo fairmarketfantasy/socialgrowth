@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131218224513) do
+ActiveRecord::Schema.define(version: 20131218220945) do
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20131218224513) do
   create_table "campaigns", force: true do |t|
     t.string   "title"
     t.string   "type"
+    t.string   "search_string"
     t.datetime "start_date"
     t.datetime "end_date"
     t.boolean  "is_active",            default: false
@@ -34,6 +35,7 @@ ActiveRecord::Schema.define(version: 20131218224513) do
     t.boolean  "should_auto_activate", default: false
     t.integer  "tweets_sent_count",    default: 0
     t.integer  "authentication_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -41,20 +43,7 @@ ActiveRecord::Schema.define(version: 20131218224513) do
   create_table "conversation_starters", force: true do |t|
     t.integer  "campaign_id"
     t.string   "text"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "excluded_terms", force: true do |t|
-    t.integer  "search_term_id"
-    t.string   "text"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "search_terms", force: true do |t|
-    t.integer  "campaign_id"
-    t.string   "text"
+    t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,4 +1,4 @@
-<%= form_for(@campaign) do |f| %>
+<%= form_for @campaign, url: campaigns_path do |f| %>
   <% if @campaign.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@campaign.errors.count, "error") %> prohibited this campaign from being saved:</h2>
@@ -10,26 +10,57 @@
       </ul>
     </div>
   <% end %>
+  <%= f.hidden_field :authentication_id %>
+  <%= f.hidden_field :user_id %>
+  <%= f.hidden_field :type %>
+
   <div class="center">
-  	<div class="section">
-  		<%= f.label :start_date %>
-    	<%= f.text_field :start_date %>
-  	</div>
-  	<div class="section">
-  		<%= f.label :end_date %>
-      <%= f.text_field :end_date %>
-  	</div>
-  	<div class="section">
-  		<button type="button" class="mts btn btn-<%= enabled_color @campaign.is_active %>" onclick="App.toggleBtn('campaign_is_active')"
-  			id="campaign_is_active" data-true="active btn-primary" data-false="inactive btn-default"><%= @campaign.is_active_string %></button>
-  		<input type='hidden' id='hidden_campaign_is_active' name='campaign[is_active]' value='<%= @campaign.is_active %>' />
-  	</div>
-  	<div class="section">
-  		<%= f.label :spams_per_day %>
-      <%= f.number_field :spams_per_day %>
+    <div class="column">
+      <div class="section">
+        <%= f.label :title %>
+        <%= f.text_field :title %>
+      </div>
+      <div class="large-section section" title="Search for tweets based on the string in this field, follow link to see format">  
+        <%= link_to "Search string", "https://dev.twitter.com/docs/using-search" %>
+        <%= f.text_area :search_string, title: "Press enter to see results of search string" %>
+      </div>
+      <div class="section">
+        <p>Search results: </p>
+        <div class="results-area" id="results">
+        </div>
+      </div>
+      <ul class="section no-style" id="conversation-starters">
+        <%= f.fields_for :conversation_starters do |starter| %>
+          <li class='conversation-starter mtm'>
+            <%= starter.text_area :text, placeholder: "Conversation starter", title: "Text to send to a user who may be interested in this campaign, must contain @user" %>
+            <%= starter.hidden_field :type %>
+          </li>
+        <% end %>
+      </ul>
     </div>
-    <div class="section">  
-      <%= f.check_box :should_auto_activate, { class: "inline-block mbs pax" } %><%= f.label :should_auto_activate, { class: "inline-block mls mbn" }  %>
+    <div class="column">
+      <!--<div class="section">
+        <button type="button" class="mts btn btn-<%= enabled_color @campaign.is_active %>" onclick="App.toggleBtn('campaign_is_active')"
+          id="campaign_is_active" data-true="active btn-primary" data-false="inactive btn-default"><%# @campaign.is_active_string %></button>
+        <input type='hidden' id='hidden_campaign_is_active' name='campaign[is_active]' value='<%= @campaign.is_active %>' />
+      </div>-->
+      <%= f.label :spams_per_day %>
+      <%= f.number_field :spams_per_day %> 
+
+      <div class="section mts mbs">
+        <%= f.label :should_auto_activate, { class: "inline-block mls mbn mrs" }  %>
+        <%= f.check_box :should_auto_activate, { class: "inline-block mbs pax" } %>
+      </div>
+
+      <%= f.label :start_date %>
+      <%= f.text_field :start_date %>
+
+      <div class="section">
+        <%= f.label :end_date %>
+        <%= f.text_field :end_date %>
+      </div>
+
+      <%= f.submit "save", { class: "btn btn-primary mtm" } %>
     </div>
   </div>
 <% end %>

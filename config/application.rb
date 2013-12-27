@@ -10,6 +10,7 @@ module Socialgrowth
   class Application < Rails::Application
     config.autoload_paths += %W(#{config.root}/app/models/authentications)
     config.autoload_paths += %W(#{config.root}/app/models/campaigns)
+    config.autoload_paths += %W(#{config.root}/app/models/conversation_starters)
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

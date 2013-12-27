@@ -3,6 +3,7 @@ class CreateConversationStarters < ActiveRecord::Migration
     create_table :conversation_starters do |t|
       t.integer :campaign_id
       t.string :text
+      t.string :type
 
       t.timestamps
     end

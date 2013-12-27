@@ -1,8 +1,10 @@
 class Campaign < ActiveRecord::Base
 	belongs_to :authentication
-	has_many :search_terms
+  belongs_to :user
   has_many :conversation_starters
   
+  accepts_nested_attributes_for :conversation_starters
+
   validates_presence_of :authentication
   validates_presence_of :title
 
@@ -10,4 +12,7 @@ class Campaign < ActiveRecord::Base
 		return self.is_active ? "active" : "inactive"
 	end
 
+  def provider
+    return self.type.gsub "Campaign", ""
+  end
 end

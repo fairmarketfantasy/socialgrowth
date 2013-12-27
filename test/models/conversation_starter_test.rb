@@ -10,8 +10,6 @@ class ConversationStarterTest < ActiveSupport::TestCase
 
   test "Can send conversation starters" do 
     campaign = create(:twitter_campaign)
-    term_1 = create(:search_term, text: "cloud", campaign: campaign)
-    exclude_1 = create(:excluded_term, text: "humid", search_term: term_1)
 
     starter_1 = create(:conversation_starter, campaign: campaign)
     starter_2 = create(:conversation_starter, campaign: campaign, text: "And the winner is... @user! #thingsyouwishwouldhappen")

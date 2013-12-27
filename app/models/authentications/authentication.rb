@@ -7,6 +7,8 @@ class Authentication < ActiveRecord::Base
   validates_presence_of :access_secret
   #validates_presence_of :user
 
+  self.inheritance_column = 'provider'
+
   def has_a_valid_provider
 	   errors.add(:base, "No valid provider present") unless Authentication.valid_providers.include? self.provider
 	end

@@ -2,5 +2,13 @@
 
 <div class="center">
   <h2>Welcome, <%= @user.name %></h2><br>
-  <a href="<%= new_campaign_path %>"><span class="fui-plus-inverted"> campaign</span></a>
+  <ul class="no-style campaign-panel">
+  	<% @user.campaigns.each do |campaign| %>
+  	<li class="pam man" data-id="<%= campaign.id %>">
+  		<p><%= campaign.provider %> campaign </p>
+  		<p>Title: <%= campaign.title %></p>
+  	</li>
+  	<% end %>
+  </ul>
+  <%= link_to "Add campaign", new_campaign_path(@campaign, type: 'TwitterCampaign'), class: "mlm" %>
 </div>

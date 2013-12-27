@@ -19,6 +19,51 @@
 	margin:0 auto;
 }
 
+.large-section textarea
+{
+	width:325px;
+}
+
+.section a
+{
+	display:block;
+	margin-bottom:5px;
+}
+
+.results-area
+{
+	width:325px;
+	height:150px;
+	padding:5px 11px;
+	border:1px solid #CBCBCB;
+	border-radius:10px;
+}
+
+.column
+{
+	width:400px;
+	height:1000px;
+	display:inline-block;
+	margin-left:20px;
+	float:left;
+}
+
+.no-style
+{
+	list-style-type:none;
+	margin:0;
+	padding:0;
+}
+
+.conversation-starter textarea
+{
+	width:300px;
+	height:70px;
+	padding:5px 11px;
+	border:1px solid #CBCBCB;
+	border-radius:10px;
+}
+
 .header-extra h2
 {
 	display:inline-block;
