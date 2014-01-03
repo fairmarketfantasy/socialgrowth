@@ -1,9 +1,27 @@
 class ConversationStarter < ActiveRecord::Base
   belongs_to :campaign
-  belongs_to :twitter_campaign
 
-  def has_valid_format
-    errors.add(:base, "Format must contain: #{format}") unless self.text.include? format
+  validate :has_valid_type
+
+  def has_valid_type
+    errors.add(:base, "type can't be #{self.type.blank? ? "blank" : self.type}") unless ConversationStarter.select_options.include? self.type
+  end
+
+  def self.select_options
+    descendants.map{ |c| c.to_s }.sort
+  end
+
+  def self.inherited(child)
+    child.instance_eval do
+      def model_name
+        ConversationStarter.model_name
+      end
+    end
+    super
+  end
+
+  def conversation_format
+    "@user"
   end
 
   def provider

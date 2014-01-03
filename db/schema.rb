@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131218220945) do
+ActiveRecord::Schema.define(version: 20131231214924) do
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id"
@@ -36,6 +36,16 @@ ActiveRecord::Schema.define(version: 20131218220945) do
     t.integer  "tweets_sent_count",    default: 0
     t.integer  "authentication_id"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "communications", force: true do |t|
+    t.string   "search_string"
+    t.string   "text_found"
+    t.string   "text_sent"
+    t.string   "username"
+    t.integer  "authentication_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

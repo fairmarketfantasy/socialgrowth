@@ -19,4 +19,6 @@ class User < ActiveRecord::Base
   def assign_name(omniauth)
   	self.name = omniauth[:info][:name]
   end
+
+  
 end

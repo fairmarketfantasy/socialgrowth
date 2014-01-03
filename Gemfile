@@ -37,6 +37,8 @@ gem 'devise'
 
 gem 'nifty-generators'
 
+gem 'simple_form'
+
 gem 'twitter'
 
 group :doc do

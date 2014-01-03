@@ -1,0 +1,13 @@
+<div class="section">
+	<ul class="section no-style" id="conversation-starters">
+	  <%= f.fields_for :conversation_starters do |starter| %>
+	    <li class='conversation-starter mtm'>
+	      <%= starter.text_area :text, placeholder: "Conversation starter", title: "Text to send to a user who may be interested in this campaign, must contain @user" %>
+	      <%= starter.hidden_field :type %>
+	    </li>
+	  <% end %>
+	</ul>
+	<a href="javascript:Rails.addAssociation('campaign', 'conversation_starters', ['text', 'type'])">
+		Add conversation starter
+	</a>
+</div>

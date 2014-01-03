@@ -18,7 +18,6 @@ $(document).on 'click', '.campaign-panel li', ->
 
 searchForTweets = (count) ->
 	searchString = $('#campaign_search_string').val()
-	console.log searchString
 	$.ajax
 		type: 'get'
 		dataType: 'json'

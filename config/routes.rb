@@ -1,6 +1,7 @@
 Socialgrowth::Application.routes.draw do
   resources :authentications
-  
+  #resources :campaigns
+  #resources :twitter_campaigns, controller: :campaigns, type: "TwitterCampaign"
   resources :campaigns do
     get 'search', on: :collection
   end

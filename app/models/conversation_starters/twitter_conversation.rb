@@ -1,7 +1,7 @@
 class TwitterConversation < ConversationStarter
-  validate :has_valid_format
-
-  def format
+	belongs_to :twitter_campaign
+	
+  def conversation_format
   	"@user"
   end
 end
