@@ -22,7 +22,7 @@ class TwitterCampaign < Campaign
 
   def get_conversation_body(tweet)
     conversation_starter = ConversationStarter.random(self.conversation_starters)
-    return conversation_starter.replace_format("@#{tweet.user.screen_name}"
+    return conversation_starter.replace_format("@#{tweet.user.screen_name}")
   end
 
   def add_communication(tweet, message)

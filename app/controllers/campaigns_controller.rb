@@ -26,8 +26,6 @@ class CampaignsController < ApplicationController
 	end
 
 	def edit
-		puts 'DX1123 YES'
-		puts campaign_params if params[:campaign]
 	end
 
 	def index
@@ -49,12 +47,9 @@ class CampaignsController < ApplicationController
 
 	def search
 		tweets = TwitterCampaign.search(params[:string], params[:count])
-		puts tweets.count
-		puts "DX678"
 		if tweets.count > 0
 			render json: tweets.map { |tweet| tweet = tweet.text } 
 		else
-			puts "blah blah blah"	
 			render json: "\"Could not find any tweets matching criteria\""
 		end
 	end
@@ -68,17 +63,13 @@ class CampaignsController < ApplicationController
     end
 
     def find_campaign
-  		@campaign = Campaign.find params[:id] if params[:id]
-  		puts @campaign
-  		puts "WILGF"
-  		return @campaign if @campaign
+  		@campaign = Campaign.find(params[:id]) if params[:id]
+  		return if @campaign
   		@campaign = current_user.campaigns.build(params[:campaign])
     end
 
     def create_campaign
-    	puts "create campaign #{campaign_params}"
     	@campaign = Campaign.new campaign_params
-    	puts "DOSTCMP #{@campaign}"
     end
 
     def find_type
@@ -101,7 +92,6 @@ class CampaignsController < ApplicationController
 	  end
 
 	  def build_a_conversation
-	  	puts "DX443 #{@type}"
 	  	return if @campaign == nil
 	  	add_conversation if @campaign.conversation_starters.count < 1
 	  end
