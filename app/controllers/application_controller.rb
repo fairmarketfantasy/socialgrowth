@@ -6,6 +6,11 @@ class ApplicationController < ActionController::Base
   def home
   end
 
+  def destroy
+	  sign_out @user
+	  redirect_to root_url, :notice => "Signed out!"
+	end
+
   private
 
 	  def current_authentication(request)

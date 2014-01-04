@@ -10,8 +10,8 @@ class TwitterAuthentication < Authentication
     return Twitter::REST::Client.new do |config|
       config.consumer_key        = TWITTER_KEY
       config.consumer_secret     = TWITTER_SECRET
-      config.access_token        = auth.access_token
-      config.access_token_secret = auth.access_secret
+      config.access_token        = self.access_token
+      config.access_token_secret = self.access_secret
     end
   end
 

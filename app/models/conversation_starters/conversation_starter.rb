@@ -39,7 +39,7 @@ class ConversationStarter < ActiveRecord::Base
   # Format table: provider:string text:string
   # replace_format would take a provider and parameters to replace each or designated formats
   def replace_format(format_text)
-    return self.text.gsub(self.format, format_text)
+    return self.text.gsub(self.conversation_format, format_text)
   end
 
 

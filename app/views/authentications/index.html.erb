@@ -1,7 +1,7 @@
 <% title = "Authentications" %>
 
 <div class="center">
-  <h2>Welcome, <%= @user.name %></h2><br>
+  <h2>Welcome, <%= @user.name %><span class="pull-right"><%= link_to "sign out", destroy_user_session_path %></span></h2><br>
   <ul class="no-style campaign-panel">
   	<% @user.campaigns.each do |campaign| %>
   	<li class="pam man campaign-item" data-id="<%= campaign.id %>">

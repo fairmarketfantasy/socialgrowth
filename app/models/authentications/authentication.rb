@@ -1,5 +1,6 @@
 class Authentication < ActiveRecord::Base
   belongs_to :user
+  has_many :communications
   
   validate :has_a_valid_provider
   validates_presence_of :uid

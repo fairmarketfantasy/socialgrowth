@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20131231214924) do
     t.string   "text_sent"
     t.string   "username"
     t.integer  "authentication_id"
+    t.integer  "campaign_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

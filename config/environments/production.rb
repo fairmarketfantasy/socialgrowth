@@ -1,4 +1,6 @@
 Socialgrowth::Application.configure do
+  TWITTER_KEY = "NPLpVacfvLbFmiMLCDwjQ"
+  TWITTER_SECRET = "nLb32dOjgoBNSWZGeQcQgSDXQ0qrOtRloZ3cbXZyxY"
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.

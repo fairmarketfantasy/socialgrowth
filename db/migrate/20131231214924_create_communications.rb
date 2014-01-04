@@ -6,7 +6,8 @@ class CreateCommunications < ActiveRecord::Migration
       t.string :text_sent
       t.string :username
       t.integer :authentication_id
-
+      t.integer :campaign_id
+      
       t.timestamps
     end
   end

@@ -32,14 +32,15 @@
       
     </div>
     <div class="column">
+      <%= f.label :spams_per_day %>
+      <%= f.text_field :spams_per_day %> 
       <!--  THESE FIELDS DO NOT IMPACT ANYTHING YET SO THEY'RE BEING COMMENTED OUT FOR LATER IMPLEMENTATION
       <div class="section">
         <button type="button" class="mts btn btn-<%= enabled_color @campaign.is_active %>" onclick="App.toggleBtn('campaign_is_active')"
           id="campaign_is_active" data-true="active btn-primary" data-false="inactive btn-default"><%# @campaign.is_active_string %></button>
         <input type='hidden' id='hidden_campaign_is_active' name='campaign[is_active]' value='<%= @campaign.is_active %>' />
       </div>
-      <%= f.label :spams_per_day %>
-      <%= f.number_field :spams_per_day %> 
+      
 
       <div class="section mts mbs">
         <%= f.label :should_auto_activate, { class: "inline-block mls mbn mrs" }  %>
@@ -53,7 +54,7 @@
         <%= f.label :end_date %>
         <%= f.text_field :end_date %>
       </div>-->
-      <h5 class="mll">Conversation Starters</h5>
+      <%= f.label :conversation_starters %>
       <%= render partial: 'campaigns/partials/conversation_starters_list', locals: { f: f } %>
       <%= f.submit "save", { class: "btn btn-primary mtm" } %>
     </div>

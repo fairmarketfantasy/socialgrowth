@@ -7,6 +7,7 @@ class TwitterCampaign < Campaign
       tweet_body = get_conversation_body tweet
       self.authentication.client.update tweet_body
       add_communication tweet, tweet_body
+      puts tweet_body
       self.tweets_sent_count += 1
     rescue Exception => msg
       puts msg.to_s + ".\r\nCouldn't tweet: " + tweet_body
@@ -27,15 +28,22 @@ class TwitterCampaign < Campaign
 
   def add_communication(tweet, message)
     Communication.create(search_string: self.search_string, text_found: tweet.text, text_sent: message, 
-      username: tweet.user.screen_name, authentication: self.authentication)
+      username: tweet.user.screen_name, authentication: self.authentication, campaign: self)
   end
 
-  def spam_people
+  def spam_people 
+    tweets_sent_today = self.amount_of_spam_sent_today
+    tweets_to_send = self.spams_per_day - tweets_sent_today
     tweets = find_related_posts
+    puts "found #{tweets.count} tweets. Have #{tweets_to_send} tweets to send yet"
     tweets.each do |tweet|
-      next if self.authentication.communications.select { |comm| comm.username == tweet.user.screen_name }.count > 0 
-      #message_person tweet
-      test_message tweet 
+      username = self.authentication.communications.where(['username = ?', tweet.user.screen_name]).first
+      puts "username: #{username} twitter: #{tweet.user.screen_name} campaign: #{self.title}"
+      next unless username.nil?
+      break unless self.spams_per_day > tweets_sent_today
+      message_person tweet
+      #test_message tweet if tweets_sent_today < self.spams_per_day
+      tweets_sent_today += 1
     end
   end
 

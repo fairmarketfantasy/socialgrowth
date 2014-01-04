@@ -1,8 +1,10 @@
 class Campaign < ActiveRecord::Base
 	belongs_to :authentication
   belongs_to :user
+
   has_many :conversation_starters
-  
+  has_many :communications
+
   accepts_nested_attributes_for :conversation_starters
 
   validates_presence_of :authentication
@@ -38,9 +40,21 @@ class Campaign < ActiveRecord::Base
     return self.type.gsub "Campaign", ""
   end
 
+  def amount_of_spam_sent_today
+    return self.communications.where(['created_at >= ?', DateTime.now.beginning_of_day]).count
+  end
+
+  def should_spam?
+    sent = self.amount_of_spam_sent_today
+    expected = self.spams_per_day
+    puts "Sent: #{sent} vs. Expected: #{expected}"
+    return sent < expected
+  end
+
   def self.spam
-    Campaign.all.each do |campaign|
-      campaign.spam_people if campaign.is_active
+    Campaign.where("is_active = ?", true).each do |campaign|
+      puts "The campaign should #{campaign.should_spam? ? "" : "not"} tweet"
+      campaign.spam_people if campaign.should_spam?
     end
   end
 end
