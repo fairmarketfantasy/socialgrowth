@@ -59,3 +59,9 @@ gem 'capistrano', '= 2.15.5', group: :development
 # gem 'debugger', group: [:development, :test]
 
 gem "mocha", group: :test
+
+gem 'god'
+gem 'puma'
+gem 'chef'
+gem 'knife-ec2', group: [:development]
+gem 'capistrano', '= 2.15.5', group: :development
