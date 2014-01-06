@@ -52,16 +52,15 @@ end
 # Use unicorn as the app server
 # gem 'unicorn'
 
-# Use Capistrano for deployment
-gem 'capistrano', '= 2.15.5', group: :development
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
 gem "mocha", group: :test
 
+# Use Capistrano for deployment
 gem 'god'
 gem 'puma'
-gem 'chef'
+gem "chef", '~> 11.6.0'
 gem 'knife-ec2', group: [:development]
 gem 'capistrano', '= 2.15.5', group: :development
