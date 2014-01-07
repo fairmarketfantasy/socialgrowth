@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
     User.uncached do
       User.first # Test DB
     end
-    render :text => "HealthCheck: OK", :status => :ok•
+    render :text => "HealthCheck: OK", :status => :ok
   end 
 
   private
