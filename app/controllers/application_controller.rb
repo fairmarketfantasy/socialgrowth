@@ -11,6 +11,13 @@ class ApplicationController < ActionController::Base
 	  redirect_to root_url, :notice => "Signed out!"
 	end
 
+  def healthcheck
+    User.uncached do
+      User.first # Test DB
+    end
+    render :text => "HealthCheck: OK", :status => :ok
+  end 
+
   private
 
 	  def current_authentication(request)

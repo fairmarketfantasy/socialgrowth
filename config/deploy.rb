@@ -2,7 +2,6 @@ require 'pp'
 require 'chef'
 require 'chef/rest'
 require 'chef/search/query'
-require 'honeybadger'
 
 
 set :user, "ubuntu"             # The server's user for deploys
@@ -15,16 +14,17 @@ ssh_options[:forward_agent] = true
 default_run_options[:pty] = true  # Must be set for the password prompt
                                   # from git to work
 
-Chef::Config.from_file(File.expand_path("~/chef-repo/.chef/knife.rb"))
+Chef::Config.from_file(File.expand_path("~/chef-repo/.chef/knife.rb")) # TODO: CHANGE THIS WHEN WE DEPLOY NON-FMF
 query = Chef::Search::Query.new
 
 task :production do 
-  query_string = "recipes:#{application} AND chef_environment:production AND recipes:mustwin-basics"
+  # TODO: REMOVE fantasysports- prefix WHEN WE DEPLOY NON-FMF
+  query_string = "recipes:fantasysports-#{application} AND chef_environment:production AND recipes:mustwin-basics"
   nodes = query.search('node', query_string).first rescue []
   role :app, *nodes.map{|n| n.ec2.public_hostname }
 end
 task :staging do 
-  query_string = "recipes:#{application} AND chef_environment:staging"
+  query_string = "recipes:fantasysports-#{application} AND chef_environment:staging"
   nodes = query.search('node', query_string).first rescue []
   role :app, *nodes.map{|n| n.ec2.public_hostname }
 end

@@ -1,3 +1,4 @@
+=begin
 APP_NAME = 'socialgrowth'
 BASE_DIR = "/mnt/www/#{APP_NAME}"
 PID_PATH = "#{BASE_DIR}/shared/pids"
