@@ -4,14 +4,20 @@
 
 .campaign-panel
 {
-	border-radius:10px;
-	border:1px solid #CBCBCB;
 	padding:0px 8px;
 	width:300px;
 	margin-bottom:10px;
+	max-height:500px;
 }
 
 .campaign-panel p
 {
 	margin-bottom:0px;
+}
+
+li.campaign-item
+{
+	border:1px solid;
+	border-radius:5px;
+	margin-top:5px;
 }

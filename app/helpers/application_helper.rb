@@ -7,9 +7,7 @@ module ApplicationHelper
   end
 
   def enabled_color(is_enabled)
-    if is_enabled
-      return "primary"
-    end
-    return "default"
+    return "enabled-color" if is_enabled
+    return "disabled-color"
   end
 end

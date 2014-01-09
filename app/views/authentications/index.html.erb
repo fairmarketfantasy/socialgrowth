@@ -4,9 +4,15 @@
   <h2>Welcome, <%= @user.name %><span class="pull-right"><%= link_to "sign out", destroy_user_session_path %></span></h2><br>
   <ul class="no-style campaign-panel">
   	<% @user.campaigns.each do |campaign| %>
-  	<li class="pam man campaign-item" data-id="<%= campaign.id %>">
-  		<p><%= campaign.provider %> campaign </p>
+  	<li class="pam man mtm campaign-item <%= enabled_color campaign.is_active %>" data-id="<%= campaign.id %>">
+
+  		<p>
+        <%= campaign.provider %> campaign
+        <a href="javascript:App.toggleCampaign()" 
+        class="icon <%= enabled_color campaign.is_active %> fui-power pull-right"></a>
+      </p>
   		<p>Title: <%= campaign.title %></p>
+
   	</li>
   	<% end %>
   </ul>

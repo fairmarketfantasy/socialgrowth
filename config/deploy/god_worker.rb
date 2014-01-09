@@ -3,11 +3,11 @@ BASE_DIR = "/mnt/www/#{APP_NAME}"
 PID_PATH = "#{BASE_DIR}/shared/pids"
 God.pid_file_directory = PID_PATH
 
-=begin
+begin
 God.watch do |w|
   pid_file = PID_PATH + "/markettender.pid"
   w.name = "markettender"
-  w.start = "bundle exec rake market:tend --trace"
+  w.start = "bundle exec rake start_all_campaigns --trace"
   w.dir = BASE_DIR + '/current/webapp'
   w.log = BASE_DIR + '/shared/log/markettender.log'
   w.env = {"RAILS_ENV" => ENV['RAILS_ENV'],

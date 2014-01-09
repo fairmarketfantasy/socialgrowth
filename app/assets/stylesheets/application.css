@@ -12,6 +12,25 @@
  *= require_tree .
  */
 
+.enabled-color
+{
+	border-color:#2ECC71;
+	color:#2ECC71;
+}
+
+.disabled-color
+{
+	border-color:#95A5A6;
+	color:#95A5A6;
+}
+
+p .icon
+{
+	width:18px;
+	height:28px;
+	overflow:hidden;
+}
+
 .header-extra,
 .center
 {
