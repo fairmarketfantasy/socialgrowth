@@ -1,18 +1,11 @@
 <% title = "Authentications" %>
 
 <div class="center">
-  <h2>Welcome, <%= @user.name %><span class="pull-right"><%= link_to "sign out", destroy_user_session_path %></span></h2><br>
+  <h2>Welcome, <%= @user.name %><span class="pull-right"><%= link_to "sign out", signout_path %></span></h2><br>
   <ul class="no-style campaign-panel">
   	<% @user.campaigns.each do |campaign| %>
-  	<li class="pam man mtm campaign-item <%= enabled_color campaign.is_active %>" data-id="<%= campaign.id %>">
-
-  		<p>
-        <%= campaign.provider %> campaign
-        <a href="javascript:App.toggleCampaign()" 
-        class="icon <%= enabled_color campaign.is_active %> fui-power pull-right"></a>
-      </p>
-  		<p>Title: <%= campaign.title %></p>
-
+  	<li data-id="<%= campaign.id %>">
+      <%= render partial: "campaigns/partials/pane", locals: { campaign: campaign } %>
   	</li>
   	<% end %>
   </ul>

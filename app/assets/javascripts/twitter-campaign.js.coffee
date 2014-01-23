@@ -13,9 +13,6 @@ handleKeyPress = (event) ->
 		searchForTweets 1
 		return false
 
-$(document).on 'click', '.campaign-panel li', ->
-	window.location = "/campaigns/" + $(@).data().id + "/edit"
-
 searchForTweets = (count) ->
 	searchString = $('#campaign_search_string').val()
 	$.ajax

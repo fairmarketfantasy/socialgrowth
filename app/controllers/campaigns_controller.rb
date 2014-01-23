@@ -31,6 +31,20 @@ class CampaignsController < ApplicationController
 	def index
 	end
 
+	def pane
+		@campaign = Campaign.find(params[:id])
+	end
+
+	def toggle
+		campaign = Campaign.find(params[:id])
+		campaign.is_active = !campaign.is_active
+		if campaign.save
+			render json: true
+		else
+			render json: false
+		end
+	end
+
 	def update
 		@campaign = Campaign.find params[:id]
 		
@@ -47,7 +61,7 @@ class CampaignsController < ApplicationController
 
 	def search
 		tweets = TwitterCampaign.search(params[:string], params[:count])
-		if tweets.count > 0
+		if tweets && tweets.count > 0
 			render json: tweets.map { |tweet| tweet = tweet.text } 
 		else
 			render json: "\"Could not find any tweets matching criteria\""

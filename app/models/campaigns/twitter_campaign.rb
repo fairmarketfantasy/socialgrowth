@@ -42,21 +42,28 @@ class TwitterCampaign < Campaign
       next unless username.nil?
       break unless self.spams_per_day > tweets_sent_today
       message_person tweet
-      #test_message tweet if tweets_sent_today < self.spams_per_day
+      #test_message tweet
       tweets_sent_today += 1
     end
   end
 
   def find_related_posts
     begin
-      return self.authentication.client.search("#{self.search_string}", count: self.spams_per_day, result_type: "recent").collect
+      return self.authentication.client.search("#{self.search_string}", count: self.spams_per_day, result_type: "recent").statuses.collect
     rescue Exception => msg
       puts msg
     end
   end
 
-  def self.search(string, count)
-    return TwitterAuthentication.application_auth.search("#{string}", count: count, result_type: "recent").collect
+  def self.search(string, count, user = nil)
+    if user
+      auth = user.authentications.where(["provider = ?", "TwitterAuthentication"]).first
+      client = auth.client if auth
+    end
+    client = TwitterAuthentication.application_auth unless client
+    return unless client
+    tweets = client.search("#{string}", count: count, result_type: "recent")
+    return tweets.statuses.collect
   end
 
   private

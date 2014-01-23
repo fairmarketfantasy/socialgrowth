@@ -1,0 +1,8 @@
+<div class="pam man mtm <%= enabled_color campaign.is_active %> campaign-item">
+	<p>
+		<%= campaign.provider %> campaign
+		<a href="javascript:App.toggleCampaignActivity(<%= campaign.id %>)" 
+			class="icon <%= enabled_color campaign.is_active %> fui-power pull-right"></a>
+	</p>
+	<p>Title: <%= campaign.title %></p>
+</div>

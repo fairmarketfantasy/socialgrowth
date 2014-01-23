@@ -4,10 +4,12 @@ Socialgrowth::Application.routes.draw do
   #resources :twitter_campaigns, controller: :campaigns, type: "TwitterCampaign"
   resources :campaigns do
     get 'search', on: :collection
+    get 'toggle', on: :collection
   end
 
   devise_for :users
 
+  match '/campaigns/:id/pane' => 'campaigns#pane', via: [:get, :post]
   match '/auth/:provider/callback' => 'authentications#create', via: [:get, :post]
   match '/authentication/add' => 'authentications#unauthenticated', via: [:get, :post]
   match '/application/home' => 'application#home', via: [:get, :post]

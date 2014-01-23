@@ -3,6 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 window.Rails ||= {}
+window.App ||= {}
 
 getLiTemplate = (name) ->
 	name = "##{name.replace "_", "-"} li:last-of-type"
@@ -52,4 +53,18 @@ incrementId = (name, model, association, attribute) ->
 	temp = "#{model}_#{association}_attributes_#{number}_#{attribute}"
 	return temp
 
+toggleCampaignActivity = (campaignId) -> 
+	$.ajax
+		type: 'get'
+		dataType: 'json'
+		url: '/campaigns/toggle'
+		data: 
+			id: campaignId
+
+		success: (data) -> loadCampaignPane(data, campaignId)
+
+loadCampaignPane = (shouldLoad, campaignId) ->
+	$("[data-id=#{campaignId}]").load("/campaigns/#{campaignId}/pane")
+
+App.toggleCampaignActivity = toggleCampaignActivity
 Rails.addAssociation = addAssociation

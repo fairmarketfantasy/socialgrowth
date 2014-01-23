@@ -62,20 +62,6 @@ ActiveRecord::Schema.define(version: 20131231214924) do
     t.datetime "updated_at"
   end
 
-  create_table "excluded_terms", force: true do |t|
-    t.integer  "search_term_id"
-    t.string   "text"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "search_terms", force: true do |t|
-    t.integer  "campaign_id"
-    t.string   "text"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
