@@ -15,7 +15,6 @@ class TwitterCampaign < Campaign
       tweet_body = get_conversation_body tweet
       self.authentication.client.update tweet_body
       add_communication tweet, tweet_body
-      puts tweet_body
       self.tweets_sent_count += 1
     rescue Exception => msg
       puts msg.to_s + ".\r\nCouldn't tweet: " + tweet_body

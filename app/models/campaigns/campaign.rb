@@ -55,13 +55,11 @@ class Campaign < ActiveRecord::Base
     self.conversation_starters.each do |conversation_starter|
       conversation_starter.delete unless valid_cs(conversation_starter.text)
     end
-    puts "has starters: #{self.conversation_starters.any?}"
   end
 
   def conversation_starter_invalid?(attributes)
-    boohoo = valid_cs(attributes['text'])
-    puts "is_boohoo? #{!boohoo}"
-    return !boohoo
+    is_valid = valid_cs(attributes['text'])
+    return !is_valid
   end
 
 	def is_active_string
@@ -79,13 +77,11 @@ class Campaign < ActiveRecord::Base
   def should_spam?
     sent = self.amount_of_spam_sent_today
     expected = self.spams_per_day
-    puts "Sent: #{sent} vs. Expected: #{expected}"
     return sent < expected
   end
 
   def self.spam
     Campaign.where("is_active = ?", true).each do |campaign|
-      puts "The campaign should #{campaign.should_spam? ? "" : "not"} tweet"
       campaign.spam_people if campaign.should_spam?
     end
   end
