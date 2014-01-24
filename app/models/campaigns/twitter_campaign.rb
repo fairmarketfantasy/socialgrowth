@@ -2,6 +2,14 @@ class TwitterCampaign < Campaign
 	belongs_to :twitter
   has_many :twitter_conversations
 
+  def cs_requirement
+    return "@user"
+  end
+
+  def valid_cs(text)
+    return !text.blank? && text.include?("@user")
+  end
+
   def message_person(tweet)
     begin
       tweet_body = get_conversation_body tweet

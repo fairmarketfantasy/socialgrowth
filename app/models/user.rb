@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_many :campaigns
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable
+  #devise :omniauthable
 
   validate :has_a_valid_authentication
 

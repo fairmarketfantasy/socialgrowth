@@ -22,6 +22,7 @@ class CampaignsController < ApplicationController
 			flash[:notice] = "Errors present: " + @campaign.errors.full_messages.to_s
 			find_type
 			build_a_conversation
+			@campaign.type = @type.gsub "Conversation", "Campaign"
 		end
 	end
 
@@ -103,11 +104,12 @@ class CampaignsController < ApplicationController
 
 	  def add_conversation
 	  	@campaign.conversation_starters.build(type: @type)
+	  	puts "c34 #{@campaign.type}"
 	  end
 
 	  def build_a_conversation
 	  	return if @campaign == nil
-	  	add_conversation if @campaign.conversation_starters.count < 1
+	  	add_conversation unless @campaign.conversation_starters.count > 0
 	  end
 
 	  def set_authentication

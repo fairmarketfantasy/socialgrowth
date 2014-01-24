@@ -1,12 +1,10 @@
-$(document).on('page:load', initKeyDetection)
-$(document).ready(initKeyDetection)
-
-$(document).on 'keypress', '#campaign_search_string', ->
-	handleKeyPress event
-
 initKeyDetection = ->
 	$("#campaign_search_string").keypress (event) ->
 		handleKeyPress event
+
+	$(".cam-pane").click ->
+		console.log($(this))
+		App.toggleCampaignActivity($(this).attr("data-id"))
 
 handleKeyPress = (event) ->
 	if event.keyCode is 13
@@ -27,3 +25,9 @@ searchForTweets = (count) ->
 
 setResultContent = (text) ->
 	$('#results').html text
+
+$(document).on('page:load', initKeyDetection)
+$(document).ready(initKeyDetection)
+
+$(document).on 'keypress', '#campaign_search_string', ->
+	handleKeyPress event

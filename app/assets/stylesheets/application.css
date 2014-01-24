@@ -24,9 +24,12 @@
 	color:#95A5A6;
 }
 
-p .icon
+p .icon,
+div.icon,
+a.icon
 {
-	width:18px;
+	cursor:pointer;
+	width:16px;
 	height:28px;
 	overflow:hidden;
 }
@@ -72,6 +75,11 @@ p .icon
 	list-style-type:none;
 	margin:0;
 	padding:0;
+}
+
+.conversation-starter
+{
+	width:380px;
 }
 
 .conversation-starter textarea

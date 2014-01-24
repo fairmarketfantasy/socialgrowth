@@ -22,6 +22,9 @@ addAssociation = (model, association, attributes) ->
 	i = 0
 
 	for subelement of children
+		if(subelement.tagName != "INPUT" || subelement.tagName != "TEXTAREA") 
+			continue
+			
 		name = children[subelement].name
 		id = children[subelement].id
 		children[subelement].name = incrementName(name, model, association, attributes[i]) if shouldReplace(name, attributes[i])
@@ -31,6 +34,25 @@ addAssociation = (model, association, attributes) ->
 		i++
 
 	unorderedList.append liTemplate
+
+showDeleteError = (string) ->
+	panel = $(".conversation-error")
+	panel.html(string)
+	panel.css({ opacity: 1, display: "block" })
+	setTimeout(() ->
+		panel.fadeTo("slow", 0, () -> panel.css({ opacity: 0, display: "none" }))
+	, 2000)
+
+removeAssociation = (item) ->
+	count = $("##{item.parent().attr('id')} li").length
+	if count <= 1
+		return showDeleteError("Can't delete your only conversation")
+	item.remove()
+
+initRemoveListeners = ->
+	$(document).on("click", ".remove-association", ->
+		removeAssociation($(this).parent())
+	)
 
 shouldReplace = (HtmlAttribute, modelField) -> 
 	return HtmlAttribute && HtmlAttribute.indexOf modelField > -1
@@ -66,5 +88,10 @@ toggleCampaignActivity = (campaignId) ->
 loadCampaignPane = (shouldLoad, campaignId) ->
 	$("[data-id=#{campaignId}]").load("/campaigns/#{campaignId}/pane")
 
+ready = ->
+	initRemoveListeners()
+
+$(document).on('page:load', ready)
+$(document).ready(ready)
 App.toggleCampaignActivity = toggleCampaignActivity
 Rails.addAssociation = addAssociation

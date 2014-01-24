@@ -16,9 +16,22 @@
 }
 
 li.campaign-item,
-div.campaign-item
+div.campaign-item,
+a.campaign-item
 {
 	border:1px solid;
 	border-radius:5px;
 	margin-top:5px;
+	display:block;
+}
+
+.campaign-item a 
+{
+	font-size:18px;
+}
+
+.conversation-error
+{
+	opacity:0;
+	display:none;
 }
