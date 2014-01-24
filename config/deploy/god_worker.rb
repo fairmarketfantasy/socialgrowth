@@ -1,10 +1,7 @@
-begin
 APP_NAME = 'socialgrowth'
 BASE_DIR = "/mnt/www/#{APP_NAME}"
 PID_PATH = "#{BASE_DIR}/shared/pids"
 God.pid_file_directory = PID_PATH
-
-begin
 
 God.watch do |w|
   pid_file = PID_PATH + "/socialgrowth.pid"
