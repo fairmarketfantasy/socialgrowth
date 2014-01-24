@@ -6,7 +6,7 @@ God.watch do |w|
   pid_file = PID_PATH + "/socialgrowth.pid"
   w.name = "socialgrowth"
   w.start = "bundle exec rake campaign:start --trace"
-  w.dir = BASE_DIR + '/current/webapp'
+  w.dir = BASE_DIR + '/current'
   w.log = BASE_DIR + '/shared/log/socialgrowth.log'
   w.env = {"RAILS_ENV" => ENV['RAILS_ENV'],
            "PIDFILE" => pid_file}
