@@ -62,14 +62,14 @@ class TwitterCampaign < Campaign
     end
   end
 
-  def self.search(string, count, user = nil)
+  def self.search(string, count, user = nil, lang = "en")
     if user
       auth = user.authentications.where(["provider = ?", "TwitterAuthentication"]).first
       client = auth.client if auth
     end
     client = TwitterAuthentication.application_auth unless client
     return unless client
-    tweets = client.search("#{string}", count: count, result_type: "recent")
+    tweets = client.search("#{string}", count: count, result_type: "recent", :lang => lang)
     return tweets.statuses.collect
   end
 

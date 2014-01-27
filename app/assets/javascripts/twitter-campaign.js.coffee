@@ -8,8 +8,8 @@ initKeyDetection = ->
 
 handleKeyPress = (event) ->
 	if event.keyCode is 13
-		searchForTweets 1
-		return false
+		searchForTweets 20
+		return false 
 
 searchForTweets = (count) ->
 	searchString = $('#campaign_search_string').val()
@@ -23,8 +23,15 @@ searchForTweets = (count) ->
 
 		success: (data) -> setResultContent data
 
-setResultContent = (text) ->
-	$('#results').html text
+setResultContent = (data) ->
+	$("#results").html "<p>Search results: </p>"
+	if data == false then $("#results").append("<div class='results-area'>No results found</div>")
+	else
+		for text of data
+			$("#results").append formatTweet(data[text])
+
+formatTweet = (tweet) ->
+	return "<div class='results-area'><p>#{tweet.author}<span class='pull-right'>#{tweet.date}</span></p><p>#{tweet.text}</p></div>"
 
 $(document).on('page:load', initKeyDetection)
 $(document).ready(initKeyDetection)

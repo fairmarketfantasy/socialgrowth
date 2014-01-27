@@ -1,18 +1,20 @@
 class CampaignsController < ApplicationController
+	include ApplicationHelper
+
 	before_action :find_campaign, only: [:new, :edit, :update]
 	before_action :create_campaign, only: [:create]
 	before_action :find_type, only: [:new]
 	before_action :build_a_conversation, only: [:new]
 
 	def new
-  	if @type == nil
-  		redirect_to root_url
-  	else
-  		@campaign.type = @type
+		if @type == nil
+			redirect_to root_url
+		else
+			@campaign.type = @type
 
-	  	set_authentication
-	  	puts @campaign.authentication.provider
-	  end
+			set_authentication
+			puts @campaign.authentication.provider
+		end
 	end
 
 	def create
@@ -63,9 +65,11 @@ class CampaignsController < ApplicationController
 	def search
 		tweets = TwitterCampaign.search(params[:string], params[:count])
 		if tweets && tweets.count > 0
-			render json: tweets.map { |tweet| tweet = tweet.text } 
+			puts "Y2K45"
+			puts tweets.first.to_s
+			render json: tweets.map { |tweet| tweet = display_hash(tweet) }
 		else
-			render json: "\"Could not find any tweets matching criteria\""
+			render json: false
 		end
 	end
 

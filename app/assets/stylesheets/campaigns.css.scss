@@ -35,3 +35,26 @@ a.campaign-item
 	opacity:0;
 	display:none;
 }
+
+.results-area
+{
+	width:325px;
+	padding:5px 11px;
+	margin-bottom:5px;
+	border:1px solid #CBCBCB;
+	border-radius:10px;
+}
+
+#results
+{
+	max-height:400px;
+	overflow:auto;
+	margin-top:10px;
+}
+
+.results-area p
+{
+	line-height:1.5;
+	font-size:14px;
+	margin-bottom:2px;
+}

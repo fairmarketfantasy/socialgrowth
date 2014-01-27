@@ -10,4 +10,8 @@ module ApplicationHelper
     return "enabled-color" if is_enabled
     return "disabled-color"
   end
+
+  def display_hash(tweet)
+  	return { author: tweet.user.name, text: tweet.text, date: tweet.created_at.strftime("%b %d, %y") } 
+  end
 end
