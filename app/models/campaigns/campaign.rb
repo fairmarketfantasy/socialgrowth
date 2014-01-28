@@ -15,7 +15,7 @@ class Campaign < ActiveRecord::Base
   accepts_nested_attributes_for :conversation_starters, allow_destroy: true, reject_if: :conversation_starter_blank?
 
   def has_atleast_one_conversation_starter
-    unless self.conversation_starters.count > 0#num_valid_conversation_starters > 0
+    unless num_valid_conversation_starters > 0#num_valid_conversation_starters > 0
       errors.add(:base, "Must have at least one valid conversation starter!")
     end
   end
