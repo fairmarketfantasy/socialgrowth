@@ -14,6 +14,7 @@ getUl = (name) ->
 	return $(name)
 
 addAssociation = (model, association, attributes) ->
+	console.log "this should be printing seriously yo"
 	unorderedList = getUl association
 	liTemplate = getLiTemplate association
 
@@ -22,15 +23,14 @@ addAssociation = (model, association, attributes) ->
 	i = 0
 
 	for subelement of children
-		if(subelement.tagName != "INPUT" || subelement.tagName != "TEXTAREA") 
-			continue
+		if(children[subelement].tagName != "INPUT" && children[subelement].tagName != "TEXTAREA") then continue
 			
 		name = children[subelement].name
 		id = children[subelement].id
 		children[subelement].name = incrementName(name, model, association, attributes[i]) if shouldReplace(name, attributes[i])
 		children[subelement].id = incrementId(id, model, association, attributes[i]) if shouldReplace(id, attributes[i])
 		children[subelement].innerHTML = ""
-		children[subelement].value = "" if children[subelement].type != "hidden"
+		if children[subelement].type != "hidden" then children[subelement].value = ""
 		i++
 
 	unorderedList.append liTemplate
@@ -63,7 +63,9 @@ incrementName = (name, model, association, attribute) ->
 	temp = temp.replace "[#{attribute}]", ""
 	temp = temp.replace "[", ""
 	temp = temp.replace "]", ""
+	console.log number
 	number = parseInt(temp) + 1
+	console.log number
 	temp = "#{model}[#{association}_attributes][#{number}][#{attribute}]"
 	return temp
 
@@ -71,7 +73,9 @@ incrementId = (name, model, association, attribute) ->
 	temp = name.replace model, ""
 	temp = temp.replace "_#{association}_attributes_", ""
 	temp = temp.replace "_#{attribute}", ""
+	console.log number
 	number = parseInt(temp) + 1
+	console.log number
 	temp = "#{model}_#{association}_attributes_#{number}_#{attribute}"
 	return temp
 

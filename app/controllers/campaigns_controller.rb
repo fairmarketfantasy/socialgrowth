@@ -18,6 +18,7 @@ class CampaignsController < ApplicationController
 	end
 
 	def create
+
 		if @campaign.save 
 			redirect_to root_url
 		else
@@ -52,21 +53,19 @@ class CampaignsController < ApplicationController
 		@campaign = Campaign.find params[:id]
 		
 		respond_to do |format|
-      if @campaign.update campaign_params 
-        format.html { redirect_to root_url, notice: 'Project was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @campaign.errors, status: :unprocessable_entity }
-      end
-    end
+			if @campaign.update campaign_params 
+				format.html { redirect_to root_url, notice: 'Project was successfully updated.' }
+				format.json { head :no_content }
+			else
+				format.html { render action: 'edit' }
+				format.json { render json: @campaign.errors, status: :unprocessable_entity }
+			end
+	    end
 	end
 
 	def search
 		tweets = TwitterCampaign.search(params[:string], params[:count])
 		if tweets && tweets.count > 0
-			puts "Y2K45"
-			puts tweets.first.to_s
 			render json: tweets.map { |tweet| tweet = display_hash(tweet) }
 		else
 			render json: false
@@ -75,7 +74,7 @@ class CampaignsController < ApplicationController
 
 	private
 
-		def campaign_params
+	def campaign_params
       params.require(:campaign).permit(:id, :title, :type, :search_string, :start_date, :end_date, 
       	:is_active, :spams_per_day, :should_auto_activate, :authentication_id, :user_id,
       	 conversation_starters_attributes: [:id, :text, :type])
@@ -88,6 +87,8 @@ class CampaignsController < ApplicationController
     end
 
     def create_campaign
+    	puts params
+    	puts "D13X"
     	@campaign = Campaign.new campaign_params
     end
 
