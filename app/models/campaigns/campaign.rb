@@ -12,10 +12,10 @@ class Campaign < ActiveRecord::Base
   validate :has_atleast_one_conversation_starter
   validate :no_invalid_conversation_starters
 
-  accepts_nested_attributes_for :conversation_starters, allow_destroy: true, reject_if: :conversation_starter_invalid?
+  accepts_nested_attributes_for :conversation_starters, allow_destroy: true, reject_if: :conversation_starter_blank?
 
   def has_atleast_one_conversation_starter
-    unless num_valid_conversation_starters > 0
+    unless self.conversation_starters.count > 0#num_valid_conversation_starters > 0
       errors.add(:base, "Must have at least one valid conversation starter!")
     end
   end
@@ -60,6 +60,10 @@ class Campaign < ActiveRecord::Base
   def conversation_starter_invalid?(attributes)
     is_valid = valid_cs(attributes['text'])
     return !is_valid
+  end
+
+  def conversation_starter_blank?(attributes)
+    return (attributes['text'].gsub(" ", "") == "")
   end
 
 	def is_active_string
