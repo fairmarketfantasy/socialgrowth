@@ -15,4 +15,5 @@ module ApplicationHelper
   	tweet.created_at.day == DateTime.now.day ? date = tweet.created_at.strftime("%l:%M %P") : date = tweet.created_at.strftime("%b %d, %y") 
   	return { author: tweet.user.name, text: tweet.text, date: date } 
   end
+
 end

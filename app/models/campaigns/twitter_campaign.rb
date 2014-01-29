@@ -69,7 +69,9 @@ class TwitterCampaign < Campaign
     end
     client = TwitterAuthentication.application_auth unless client
     return unless client
-    tweets = client.search("#{string}", count: count, result_type: "recent", :lang => lang)
+    string.gsub!("-rt", "") if(string.include?(" -rt ") || "-rt".is_on_edge_of(string))
+    puts "#{string} HY45"
+    tweets = client.search("#{string} -rt", count: count, result_type: "recent", :lang => lang)
     return tweets.statuses.collect
   end
 
